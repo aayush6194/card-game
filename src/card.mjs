@@ -1,5 +1,5 @@
 import { compose, shuffle } from './helpers.mjs';
-import { SUITES, CARDS } from './constants.mjs';
+import { SUITES, SUITES_SYMBOLS, CARDS } from './constants.mjs';
 
 const Card = (suite) => (name, points) =>
     compose(
@@ -20,7 +20,7 @@ const Card = (suite) => (name, points) =>
         suite,
         equals: (other) =>
             Object.is(name, other.name) && Object.is(suite, other.suite),
-        toString: () => `${name} (${suite})`,
+        toString: () => `${name} (${SUITES_SYMBOLS[suite]})`,
     });
 
 export const createDeck = () => {

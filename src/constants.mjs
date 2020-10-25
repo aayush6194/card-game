@@ -2,6 +2,17 @@
  * @readonly
  */
 export const SUITES = ['Heart', 'Diamond', 'Club', 'Spade'];
+
+/**
+ * @readonly
+ */
+export const SUITES_SYMBOLS = {
+    Heart: '♥',
+    Diamond: '♦',
+    Club: '♣',
+    Spade: '♠',
+};
+
 /**
  * Creates an object with key as card name and value as points
  * @readonly

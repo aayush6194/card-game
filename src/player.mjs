@@ -1,5 +1,4 @@
 import { SUITES } from './constants.mjs';
-import { compose } from './helpers.mjs';
 import { add, prop } from './helpers.mjs';
 
 export class Player {
