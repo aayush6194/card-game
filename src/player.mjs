@@ -1,29 +1,48 @@
-class Player {
+import { SUITES } from './constants.mjs';
+import { compose } from './helpers.mjs';
+import { add, prop } from './helpers.mjs';
+
+export class Player {
     /**
      * @type {string}
      */
-    #name;
+    name = '';
 
     /**
-     * @type {Card[]}
+     * @type {Object<string, Card>}
      */
-    #cards;
-
-    /**
-     * @type {number}
-     */
-    #points;
+    #cards = SUITES.reduce((acc, suite) => {
+        acc[suite] = [];
+        return acc;
+    }, {});
 
     constructor(name) {
-        this.#name = name;
-        this.#points = 0;
-        this.#cards = [];
+        this.name = name;
     }
+
     /**
-     * @return {Card}
+     * last element is the top of the deck
+     * @param {Card} card
      */
-    /** last element is the top of the deck */
-    drawCard(deck) {
-        deck.getTopCard();
+    addToHand(card) {
+        this.#cards[card.suite].push(card);
+    }
+
+    [Symbol.toPrimitive](hint) {
+        switch (hint) {
+            case 'number':
+                return Object.values(this.#cards)
+                    .flat()
+                    .map(prop('points'))
+                    .reduce(add, 0);
+            default:
+                return `${this.name}'s hand: ${+this} points! [${SUITES.flatMap(
+                    (suite) => this.#cards[suite]
+                ).join(', ')}]`;
+        }
+    }
+
+    [Symbol.iterator]() {
+        return this.#cards.values();
     }
 }

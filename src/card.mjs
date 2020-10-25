@@ -1,42 +1,38 @@
-export class Card {
-    /**
-     * @type {string}
-     */
-    #name;
-    /**
-     * @type {number}
-     */
-    #points;
-    /**
-     * @type {string}
-     */
-    #suite;
+import { compose, shuffle } from './helpers.mjs';
+import { SUITES, CARDS } from './constants.mjs';
 
-    /**
-     * Creates a Card
-     * @param {string} name
-     * @param {number} points points assigned to each card
-     * @param {string} suite
-     */
-    constructor(name, points, suite) {
-        this.#name = name;
-        this.#points = points;
-        this.#suite = suite;
-    }
+const Card = (suite) => (name, points) =>
+    compose(
+        Object.seal,
+        Object.freeze
+    )({
+        /**
+         * @type {string}
+         */
+        name,
+        /**
+         * @type {number}
+         */
+        points,
+        /**
+         * @type {string}
+         */
+        suite,
+        equals: (other) =>
+            Object.is(name, other.name) && Object.is(suite, other.suite),
+        toString: () => `${name} (${suite})`,
+    });
 
+export const createDeck = () => {
     /**
-     * Get points of the Card
-     * @return {number}
+     * @type {Card[]}
      */
-    get points() {
-        return this.#points;
-    }
-
-    /**
-     * Get name of the Card
-     * @return {string}
-     */
-    get name() {
-        return this.#name;
-    }
-}
+    const deck = SUITES.flatMap((suite) => {
+        const card = Card(suite);
+        return Object.entries(CARDS).map(([name, points]) =>
+            card(name, points)
+        );
+    });
+    shuffle(deck);
+    return deck;
+};

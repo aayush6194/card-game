@@ -1,4 +1,9 @@
-import { Deck } from './deck.mjs';
+import { Game } from './game.mjs';
 
-const deck = new Deck();
-console.log(deck);
+function main() {
+    const game = new Game(4);
+    game.playGame();
+    game.printScoreBoard();
+}
+
+main();

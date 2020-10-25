@@ -1,11 +1,14 @@
-//
-export const SUITES = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
+/**
+ * @readonly
+ */
+export const SUITES = ['Heart', 'Diamond', 'Club', 'Spade'];
 /**
  * Creates an object with key as card name and value as points
+ * @readonly
  */
 export const CARDS = (() => {
-    const cardsPoint = { ace: 15 };
-    const facedCards = ['jacks', 'queen', 'king'];
+    const cardsPoint = { Ace: 15 };
+    const facedCards = ['Jack', 'Queen', 'King'];
     const numberedCards = Array(9).fill(9);
 
     facedCards.map((card) => {

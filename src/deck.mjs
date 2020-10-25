@@ -1,36 +1,15 @@
-import { Card } from './card.mjs';
-import { SUITES, CARDS } from './constants.mjs';
+import { createDeck } from './card.mjs';
 
 export class Deck {
     /**
-     * @type {Card[]}
+     * @member {Card[]}
      */
-    #cards;
-
-    constructor() {
-        this.createDeck();
-        this.shuffleDeck();
-    }
-    /**
-     * Create Deck
-     */
-    createDeck() {
-        this.#cards = SUITES.map((suite) =>
-            Object.entries(CARDS).map(
-                ([name, points]) => new Card(name, points, suite)
-            )
-        );
-    }
+    #cards = createDeck();
 
     /**
-     * Create Deck
+     * @return {Card}
      */
-    shuffleDeck() {
-        for (let i = this.#cards.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.#cards[i], this.#cards[j]] = [this.#cards[j], this.#cards[i]];
-        }
+    drawCard() {
+        return this.#cards.pop();
     }
-
-    getTopCard() {}
 }
