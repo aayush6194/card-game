@@ -35,9 +35,9 @@ export class Player {
                     .map(prop('points'))
                     .reduce(add, 0);
             default:
-                return `${this.name}'s hand: ${+this} points! [${SUITES.flatMap(
+                return `${this.name}'s hand: ${+this} points! (Cards: ${SUITES.flatMap(
                     (suite) => this.#cards[suite]
-                ).join(', ')}]`;
+                ).join(', ')})`;
         }
     }
 

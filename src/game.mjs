@@ -20,6 +20,7 @@ export class Game {
     }
 
     /**
+     * Simulates a round in a game where each player draws a top card.
      * @return {void}
      */
     playRound() {
@@ -30,7 +31,7 @@ export class Game {
     }
 
     /**
-     *
+     *  Simulates a game
      * @return {void}
      */
     playGame() {
@@ -39,9 +40,15 @@ export class Game {
             .forEach((_) => this.playRound());
     }
 
+    /**
+     * Print the current player cards to the console.  
+     * @return {void}
+     */
     printScoreBoard() {
+        // Interate Score and Cards of each player
         this.#players.forEach((player) => console.log(`${player}`));
-        // handle ties?
+
+        // Calculate winners and points
         const [points, winners] = this.#players.reduce(
             ([max, players], player) => {
                 const points = +player;
@@ -55,6 +62,7 @@ export class Game {
             [0, []]
         );
 
+        // More than 1 winners.
         if (winners.length > 1) {
             console.log(
                 `It's a tie between ${winners
