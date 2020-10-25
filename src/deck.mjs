@@ -12,7 +12,8 @@ export class Deck {
         this.shuffleDeck();
     }
     /**
-     * Create Deck
+     * Create a Deck of 52 card (13 cards * 4 suites)
+     * @return {void}
      */
     createDeck() {
         this.#cards = SUITES.map((suite) =>
@@ -23,7 +24,8 @@ export class Deck {
     }
 
     /**
-     * Create Deck
+     * Shuffle the Deck
+     * @return {void}
      */
     shuffleDeck() {
         for (let i = this.#cards.length - 1; i > 0; i--) {
