@@ -12,4 +12,12 @@ export class Deck {
     drawCard() {
         return this.#cards.pop();
     }
+
+    /**
+     * Check if the deck is empty
+     * @return {boolean} returns true if the deck is empty. 
+     */
+    isEmpty() {
+        return this.#cards.length === 0;
+    }
 }
