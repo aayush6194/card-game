@@ -11,18 +11,16 @@ export class Game {
    * @member {Deck}
    */
   #deck;
-   /**
+  /**
    * @member {number}
    */
   #rounds;
 
   constructor(totalPlayers, rounds = 5) {
+    this.#canPlay(totalPlayers, rounds);
     this.#deck = new Deck();
     this.#rounds = rounds;
 
-    if (totalPlayers < 2 || totalPlayers > 6) {
-      throw new Error(`Invalid Number of Players: ${totalPlayers}`);
-    }
     this.#players = Array(totalPlayers)
       .fill(0)
       .map((_, i) => new Player(`Player ${i + 1}`));
@@ -38,6 +36,20 @@ export class Game {
       const card = this.#deck.drawCard();
       player.addToHand(card);
     }
+  }
+
+ /**
+   * Simulates a round in a game where each player draws a top card.
+   * @return {void}
+   */
+  #canPlay(totalPlayers, rounds){
+    if (totalPlayers < 2) {
+        throw new Error(`Invalid Number of Players: ${totalPlayers}`);
+      } else if (totalPlayers * rounds > 52) {
+        throw new Error(
+          `Not Enough Cards: (Players: ${totalPlayers}, rounds: ${rounds})`
+        );
+      }
   }
 
   /**
